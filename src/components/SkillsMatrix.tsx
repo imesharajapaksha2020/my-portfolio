@@ -17,7 +17,7 @@ export default function SkillsMatrix() {
   const [activeTab, setActiveTab] = useState<'skills' | 'coursework'>('skills');
 
   return (
-    <section id="skills" className="py-16 md:py-24 bg-slate-50/50 dark:bg-slate-900/30 border-y border-slate-200/80 dark:border-slate-800/80">
+    <section id="skills" className="scroll-mt-16 md:scroll-mt-20 pt-7 pb-16 md:pt-9 md:pb-20 bg-slate-50/50 dark:bg-slate-900/30 border-y border-slate-200/80 dark:border-slate-800/80">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header & Tabs */}

@@ -58,7 +58,7 @@ export default function ProfessorDashboard() {
   };
 
   return (
-    <section id="professor-dashboard" className="py-12 bg-slate-100/70 dark:bg-slate-900/90 text-slate-900 dark:text-white border-y border-slate-200 dark:border-slate-800 transition-colors">
+    <section id="professor-dashboard" className="scroll-mt-16 md:scroll-mt-20 pt-7 pb-10 md:pt-8 md:pb-12 bg-slate-100/70 dark:bg-slate-900/90 text-slate-900 dark:text-white border-y border-slate-200 dark:border-slate-800 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header Bar with Filter Switcher */}

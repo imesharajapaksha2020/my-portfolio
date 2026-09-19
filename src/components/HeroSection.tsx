@@ -29,14 +29,22 @@ export default function HeroSection() {
   const [copiedPhone, setCopiedPhone] = useState(false);
   const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
 
-  const handleCopyEmail = () => {
+  const handleCopyEmail = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     navigator.clipboard.writeText(PERSONAL_INFO.email);
     setCopiedEmail(true);
     logInteraction('Copied Contact Email', PERSONAL_INFO.email, 'Copy');
     setTimeout(() => setCopiedEmail(false), 2500);
   };
 
-  const handleCopyPhone = () => {
+  const handleCopyPhone = (e?: React.MouseEvent) => {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     navigator.clipboard.writeText(PERSONAL_INFO.phone);
     setCopiedPhone(true);
     logInteraction('Copied Contact Phone', PERSONAL_INFO.phone, 'Phone');
@@ -68,19 +76,21 @@ export default function HeroSection() {
             </div>
 
             {/* Candidate Identity with Academic Portrait */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 pt-1">
+            <div className="flex flex-col sm:flex-row items-start gap-5 sm:gap-6 pt-1">
               <div className="relative group shrink-0">
                 <div
                   onClick={handleOpenConvocationPhoto}
-                  className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden border-2 border-emerald-500/50 dark:border-emerald-400/40 shadow-xl shadow-emerald-600/15 group-hover:scale-105 transition-all duration-300 relative bg-slate-100 dark:bg-slate-800 cursor-pointer"
+                  className="w-32 h-40 sm:w-36 sm:h-44 md:w-40 md:h-48 lg:w-44 lg:h-52 rounded-2xl overflow-hidden border-2 border-emerald-500/50 dark:border-emerald-400/40 shadow-xl shadow-emerald-600/15 group-hover:scale-[1.02] transition-all duration-300 relative bg-slate-100 dark:bg-slate-800 cursor-pointer"
                   title="Click to view full graduation convocation photo"
                 >
                   <Image
                     src={PERSONAL_INFO.photoUrl}
                     alt={PERSONAL_INFO.name}
-                    width={112}
-                    height={112}
-                    className="w-full h-full object-cover"
+                    width={360}
+                    height={420}
+                    quality={100}
+                    unoptimized
+                    className="w-full h-full object-cover object-top"
                     priority
                   />
                   <div className="absolute inset-0 bg-emerald-950/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -89,7 +99,7 @@ export default function HeroSection() {
                 </div>
                 <button
                   onClick={handleOpenConvocationPhoto}
-                  className="absolute -bottom-2 -right-1 px-2 py-0.5 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold shadow-md flex items-center gap-1 transition-colors cursor-pointer"
+                  className="absolute -bottom-2 -right-1 px-2.5 py-0.5 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white text-[10px] font-bold shadow-md flex items-center gap-1 transition-colors cursor-pointer z-10"
                   title="Verified Convocation 2025 Graduate"
                 >
                   <Award className="w-3 h-3" />
@@ -119,6 +129,126 @@ export default function HeroSection() {
               </div>
             </div>
 
+            {/* Highlighted Direct Contact & Academic Profiles Hub (Prominently placed at top) */}
+            <div className="p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-emerald-500/10 via-slate-100/90 to-indigo-500/10 dark:from-emerald-950/30 dark:via-slate-900/90 dark:to-indigo-950/30 border border-emerald-500/30 dark:border-emerald-500/25 shadow-md shadow-emerald-900/5 backdrop-blur-xs space-y-2.5">
+              <div className="flex items-center justify-between gap-2">
+                <span className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400">
+                  <Mail className="w-3.5 h-3.5" />
+                  Direct Contact & Verified Academic Profiles
+                </span>
+                <span className="text-[11px] text-slate-500 dark:text-slate-400 hidden sm:inline font-medium">
+                  Tap to email, call, or copy
+                </span>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
+                {/* Email Chip with 1-click Email + Copy button */}
+                <div className="inline-flex items-center bg-white dark:bg-slate-800/95 rounded-xl border border-slate-200/90 dark:border-slate-700 shadow-xs hover:border-emerald-500/60 dark:hover:border-emerald-400/60 transition-all overflow-hidden max-w-full">
+                  <a
+                    href={`mailto:${PERSONAL_INFO.email}`}
+                    className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-800 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                    title="Send an email to Imesha"
+                  >
+                    <Mail className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                    <span className="truncate max-w-[175px] sm:max-w-none">{PERSONAL_INFO.email}</span>
+                  </a>
+                  <button
+                    onClick={handleCopyEmail}
+                    className="px-2.5 py-2 border-l border-slate-200 dark:border-slate-700 text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors cursor-pointer shrink-0"
+                    title="Copy email address"
+                    aria-label="Copy email"
+                  >
+                    {copiedEmail ? (
+                      <span className="flex items-center gap-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
+                        <Check className="w-3.5 h-3.5" />
+                        <span className="hidden sm:inline">Copied</span>
+                      </span>
+                    ) : (
+                      <Copy className="w-3.5 h-3.5" />
+                    )}
+                  </button>
+                </div>
+
+                {/* Phone Chip with 1-click Call + Copy button */}
+                <div className="inline-flex items-center bg-white dark:bg-slate-800/95 rounded-xl border border-slate-200/90 dark:border-slate-700 shadow-xs hover:border-emerald-500/60 dark:hover:border-emerald-400/60 transition-all overflow-hidden shrink-0">
+                  <a
+                    href={`tel:${PERSONAL_INFO.phone.replace(/\s+/g, '')}`}
+                    className="flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-800 dark:text-slate-200 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                    title="Call or message via Phone"
+                  >
+                    <Phone className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0" />
+                    <span>{PERSONAL_INFO.phone}</span>
+                  </a>
+                  <button
+                    onClick={handleCopyPhone}
+                    className="px-2.5 py-2 border-l border-slate-200 dark:border-slate-700 text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors cursor-pointer shrink-0"
+                    title="Copy phone number"
+                    aria-label="Copy phone"
+                  >
+                    {copiedPhone ? (
+                      <span className="flex items-center gap-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
+                        <Check className="w-3.5 h-3.5" />
+                        <span className="hidden sm:inline">Copied</span>
+                      </span>
+                    ) : (
+                      <Copy className="w-3.5 h-3.5" />
+                    )}
+                  </button>
+                </div>
+
+                {/* Social Profiles */}
+                <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                  {/* LinkedIn */}
+                  <a
+                    href={PERSONAL_INFO.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white dark:bg-slate-800/95 border border-slate-200/90 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-[#0077b5] hover:border-[#0077b5]/50 hover:bg-[#0077b5]/5 shadow-xs transition-all active:scale-95 cursor-pointer"
+                    title="LinkedIn Profile"
+                  >
+                    <LinkedinIcon className="w-4 h-4 text-[#0077b5]" />
+                    <span className="hidden sm:inline">LinkedIn</span>
+                  </a>
+
+                  {/* GitHub */}
+                  <a
+                    href={PERSONAL_INFO.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white dark:bg-slate-800/95 border border-slate-200/90 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:border-slate-400 shadow-xs transition-all active:scale-95 cursor-pointer"
+                    title="GitHub Repositories"
+                  >
+                    <GithubIcon className="w-4 h-4" />
+                    <span className="hidden sm:inline">GitHub</span>
+                  </a>
+
+                  {/* Google Scholar */}
+                  <a
+                    href={PERSONAL_INFO.googleScholar}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white dark:bg-slate-800/95 border border-slate-200/90 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-emerald-600 dark:hover:text-emerald-400 hover:border-emerald-500/50 hover:bg-emerald-500/5 shadow-xs transition-all active:scale-95 cursor-pointer"
+                    title="Google Scholar Profile"
+                  >
+                    <GraduationCap className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
+                    <span>Scholar</span>
+                  </a>
+
+                  {/* ResearchGate */}
+                  <a
+                    href={PERSONAL_INFO.researchGate}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white dark:bg-slate-800/95 border border-slate-200/90 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-teal-600 dark:hover:text-teal-400 hover:border-teal-500/50 hover:bg-teal-500/5 shadow-xs transition-all active:scale-95 cursor-pointer"
+                    title="ResearchGate Profile"
+                  >
+                    <BookOpen className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                    <span>RG</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
             {/* Quick Bio */}
             <p className="text-base sm:text-lg text-slate-700 dark:text-slate-300 leading-relaxed font-normal max-w-3xl">
               {PERSONAL_INFO.bio}
@@ -132,7 +262,7 @@ export default function HeroSection() {
                   setIsCVModalOpen(true);
                   logInteraction('Opened CV Modal', 'Hero Action Button', 'FileText');
                 }}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-semibold text-sm shadow-lg shadow-emerald-600/25 transition-all"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-semibold text-sm shadow-lg shadow-emerald-600/25 transition-all cursor-pointer"
               >
                 <FileText className="w-4 h-4" />
                 <span>View & Download CV (PDF)</span>
@@ -144,7 +274,7 @@ export default function HeroSection() {
                   setIsContactModalOpen(true);
                   logInteraction('Opened Faculty Inquiry Modal', 'Hero Action Button', 'Send');
                 }}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-white font-semibold text-sm border border-slate-300 dark:border-slate-700 transition-all"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-800 dark:text-white font-semibold text-sm border border-slate-300 dark:border-slate-700 transition-all cursor-pointer"
               >
                 <Send className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                 <span>Faculty / Advisor Inquiry</span>
@@ -152,88 +282,11 @@ export default function HeroSection() {
 
               <a
                 href="#research-pillars"
-                className="inline-flex items-center gap-1.5 px-4 py-3 rounded-xl text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 text-sm font-medium transition-colors"
+                className="inline-flex items-center gap-1.5 px-4 py-3 rounded-xl text-slate-600 dark:text-slate-400 hover:text-emerald-600 dark:hover:text-emerald-400 text-sm font-medium transition-colors cursor-pointer"
               >
                 <span>Explore Research Hook</span>
                 <ArrowDown className="w-4 h-4" />
               </a>
-            </div>
-
-            {/* Quick Links: Icons for LinkedIn, GitHub, Google Scholar, ResearchGate, Email */}
-            <div className="pt-4 border-t border-slate-200 dark:border-slate-800/80 flex flex-wrap items-center gap-4">
-              <span className="text-xs uppercase tracking-wider font-bold text-slate-400 dark:text-slate-500">
-                Academic & Social Profiles:
-              </span>
-
-              <div className="flex items-center space-x-2">
-                {/* Email with copy tooltip */}
-                <button
-                  onClick={handleCopyEmail}
-                  className="p-2.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:text-emerald-400 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-all flex items-center gap-1.5 text-xs font-semibold cursor-pointer"
-                  title="Click to copy primary email"
-                >
-                  <Mail className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                  <span>{PERSONAL_INFO.email}</span>
-                  {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5 text-slate-400" />}
-                </button>
-
-                {/* Phone with copy tooltip */}
-                <button
-                  onClick={handleCopyPhone}
-                  className="p-2.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:text-emerald-400 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-all flex items-center gap-1.5 text-xs font-semibold cursor-pointer"
-                  title="Click to copy phone number"
-                >
-                  <Phone className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                  <span>{PERSONAL_INFO.phone}</span>
-                  {copiedPhone ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5 text-slate-400" />}
-                </button>
-
-                {/* LinkedIn */}
-                <a
-                  href={PERSONAL_INFO.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-blue-500/10 hover:text-blue-600 dark:hover:text-blue-400 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-all"
-                  title="LinkedIn Profile"
-                >
-                  <LinkedinIcon className="w-4 h-4" />
-                </a>
-
-                {/* GitHub */}
-                <a
-                  href={PERSONAL_INFO.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-2.5 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-300 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-all"
-                  title="GitHub Repositories"
-                >
-                  <GithubIcon className="w-4 h-4" />
-                </a>
-
-                {/* Google Scholar */}
-                <a
-                  href={PERSONAL_INFO.googleScholar}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-2.5 py-2 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:text-emerald-400 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-all text-xs font-semibold flex items-center gap-1.5"
-                  title="Google Scholar Profile"
-                >
-                  <GraduationCap className="w-4 h-4 text-emerald-600" />
-                  <span>Scholar</span>
-                </a>
-
-                {/* ResearchGate */}
-                <a
-                  href={PERSONAL_INFO.researchGate}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-2.5 py-2 rounded-lg bg-slate-100 dark:bg-slate-800/80 hover:bg-teal-500/10 hover:text-teal-600 dark:hover:text-teal-400 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 transition-all text-xs font-semibold flex items-center gap-1.5"
-                  title="ResearchGate Profile"
-                >
-                  <BookOpen className="w-4 h-4 text-teal-600" />
-                  <span>RG</span>
-                </a>
-              </div>
             </div>
 
           </div>

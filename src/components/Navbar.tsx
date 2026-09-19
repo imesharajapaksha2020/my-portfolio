@@ -46,7 +46,7 @@ export default function Navbar() {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
-      const scrollPosition = window.scrollY + 130;
+      const scrollPosition = window.scrollY + 100;
 
       // When scrolled near bottom of page, highlight last section
       const isAtBottom =
@@ -58,7 +58,7 @@ export default function Navbar() {
 
       // If in hero section at top of page
       const firstSection = document.getElementById(sectionIds[0]);
-      if (firstSection && window.scrollY + 180 < firstSection.offsetTop) {
+      if (firstSection && window.scrollY + 120 < firstSection.offsetTop) {
         setActiveSection('');
         return;
       }
@@ -67,7 +67,7 @@ export default function Navbar() {
       let current = '';
       for (let i = sectionIds.length - 1; i >= 0; i--) {
         const el = document.getElementById(sectionIds[i]);
-        if (el && scrollPosition >= el.offsetTop - 50) {
+        if (el && scrollPosition >= el.offsetTop - 30) {
           current = sectionIds[i];
           break;
         }
@@ -87,7 +87,7 @@ export default function Navbar() {
     const elem = document.getElementById(targetId);
     if (elem) {
       setActiveSection(targetId);
-      const navbarOffset = 76;
+      const navbarOffset = 64;
       const elementPosition = elem.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - navbarOffset;
 
@@ -169,12 +169,12 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-40 transition-all duration-300 ${
         scrolled
-          ? 'glass-panel shadow-md dark:shadow-2xl py-2.5'
-          : 'bg-transparent py-3 sm:py-4'
+          ? 'bg-white/95 dark:bg-[#070b14]/95 backdrop-blur-md shadow-md dark:shadow-2xl py-2 border-b border-slate-200/80 dark:border-slate-800/80'
+          : 'bg-white/90 dark:bg-[#070b14]/90 backdrop-blur-md py-2.5 sm:py-3.5 border-b border-slate-200/50 dark:border-slate-800/50'
       }`}
     >
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between gap-3 lg:gap-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="flex items-center justify-between gap-2 sm:gap-4 w-full">
           
           {/* Brand / Academic Identity */}
           <a href="#" className="flex items-center space-x-2.5 sm:space-x-3 group shrink-0">
@@ -187,16 +187,10 @@ export default function Navbar() {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div>
-              <div className="flex items-center space-x-2">
-                <span className="font-bold text-sm sm:text-base tracking-tight text-slate-900 dark:text-white whitespace-nowrap">
-                  Imesha Rajapaksha
-                </span>
-                <span className="hidden 2xl:inline-flex items-center gap-1 text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20 whitespace-nowrap">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                  PhD Applicant
-                </span>
-              </div>
+            <div className="flex flex-col">
+              <span className="font-bold text-sm sm:text-base tracking-tight text-slate-900 dark:text-white whitespace-nowrap">
+                Imesha Rajapaksha
+              </span>
               <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium hidden md:block whitespace-nowrap">
                 Operations Research & Biostatistics
               </p>
@@ -214,7 +208,7 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`px-3 py-1.5 rounded-xl border transition-all duration-200 whitespace-nowrap relative cursor-pointer ${
+                  className={`px-2.5 xl:px-3 py-1.5 rounded-xl border transition-all duration-200 whitespace-nowrap relative cursor-pointer ${
                     isActive ? getActiveTabClasses(true) : 'border-transparent ' + getActiveTabClasses(false)
                   }`}
                   aria-current={isActive ? 'page' : undefined}
@@ -222,7 +216,7 @@ export default function Navbar() {
                   <span>{link.name}</span>
                   {isActive && (
                     <span
-                      className={`absolute bottom-0 left-3 right-3 h-0.5 ${getActiveIndicatorColor()} rounded-full transition-all duration-300`}
+                      className={`absolute bottom-0 left-2.5 right-2.5 xl:left-3 xl:right-3 h-0.5 ${getActiveIndicatorColor()} rounded-full transition-all duration-300`}
                     ></span>
                   )}
                 </a>
@@ -232,19 +226,16 @@ export default function Navbar() {
 
           {/* Action Bar (Theme, Palette, Bookmark, Download CV) */}
           <div className="flex items-center space-x-1.5 sm:space-x-2 shrink-0">
-            {/* Academic Palette Customizer Dropdown */}
-            <div className="relative" ref={paletteMenuRef}>
+            {/* Academic Palette Customizer Dropdown - icon only */}
+            <div className="relative hidden sm:block" ref={paletteMenuRef}>
               <button
                 id="palette-toggle-btn"
                 onClick={() => setPaletteMenuOpen(!paletteMenuOpen)}
-                className="p-2 rounded-xl text-slate-600 dark:text-slate-300 bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors border border-slate-200 dark:border-slate-700/80 flex items-center gap-1.5"
-                title="Customize Academic Theme Palette"
+                className="p-2 rounded-xl text-slate-600 dark:text-slate-300 bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors border border-slate-200 dark:border-slate-700/80 flex items-center justify-center relative cursor-pointer"
+                title={`Academic Theme Palette (${accentTheme})`}
                 aria-label="Theme Palette"
               >
                 <Palette className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                <span className="hidden 2xl:inline text-xs font-semibold capitalize">
-                  {accentTheme}
-                </span>
               </button>
 
               {paletteMenuOpen && (
@@ -286,7 +277,7 @@ export default function Navbar() {
             <button
               id="theme-toggle-btn"
               onClick={toggleTheme}
-              className="p-2 rounded-xl text-slate-600 dark:text-slate-300 bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors border border-slate-200 dark:border-slate-700/80"
+              className="p-2 rounded-xl text-slate-600 dark:text-slate-300 bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors border border-slate-200 dark:border-slate-700/80 cursor-pointer"
               title={isHydrated && theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
               aria-label="Toggle Dark/Light Theme"
             >
@@ -297,17 +288,16 @@ export default function Navbar() {
               )}
             </button>
 
-            {/* Starred Review Items Counter */}
+            {/* Starred Review Items Counter - icon with absolute badge */}
             <button
               id="navbar-starred-btn"
               onClick={() => setIsStarredDrawerOpen(true)}
-              className="relative p-2 rounded-xl text-slate-600 dark:text-slate-300 bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors border border-slate-200 dark:border-slate-700/80 flex items-center gap-1.5 text-xs font-semibold"
+              className="relative p-2 rounded-xl text-slate-600 dark:text-slate-300 bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors border border-slate-200 dark:border-slate-700/80 flex items-center justify-center text-xs font-semibold cursor-pointer"
               title="View your starred research items for review"
             >
               <Bookmark className="w-4 h-4 text-emerald-600 dark:text-emerald-400 fill-emerald-500/20" />
-              <span className="hidden xl:inline">Review List</span>
               {isHydrated && starredIds.length > 0 && (
-                <span className="bg-emerald-500 text-white text-[11px] font-bold px-1.5 py-0.2 rounded-full min-w-[18px] text-center shadow-xs">
+                <span className="absolute -top-1.5 -right-1.5 bg-emerald-500 text-white text-[10px] font-bold px-1.5 py-0.2 rounded-full min-w-[18px] text-center shadow-xs">
                   {starredIds.length}
                 </span>
               )}
@@ -317,7 +307,7 @@ export default function Navbar() {
             <button
               id="navbar-cv-download-btn"
               onClick={() => setIsCVModalOpen(true)}
-              className="inline-flex items-center space-x-1.5 sm:space-x-2 px-3 sm:px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white text-xs sm:text-sm font-semibold shadow-md shadow-emerald-600/25 transition-all whitespace-nowrap"
+              className="inline-flex items-center space-x-1.5 sm:space-x-2 px-3 sm:px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white text-xs sm:text-sm font-semibold shadow-md shadow-emerald-600/25 transition-all whitespace-nowrap cursor-pointer"
             >
               <FileText className="w-4 h-4 shrink-0" />
               <span className="hidden sm:inline">Academic CV</span>
@@ -327,7 +317,7 @@ export default function Navbar() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-xl text-slate-600 dark:text-slate-300 bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700/80"
+              className="lg:hidden p-2 rounded-xl text-slate-600 dark:text-slate-300 bg-slate-100/80 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700/80 cursor-pointer"
               aria-label="Toggle Mobile Menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

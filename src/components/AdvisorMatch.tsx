@@ -38,7 +38,7 @@ Best regards,
   };
 
   return (
-    <section id="advisor-fit" className="py-16 md:py-24 bg-white dark:bg-slate-950">
+    <section id="advisor-fit" className="scroll-mt-16 md:scroll-mt-20 pt-7 pb-16 md:pt-9 md:pb-20 bg-white dark:bg-slate-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
