@@ -23,6 +23,7 @@ export const PERSONAL_INFO = {
   altEmail: 's19842@sci.pdn.ac.lk',
   phone: '+94 78 249 2665',
   location: 'Sri Lanka',
+  website: 'https://imesha-sewwandhi-portfolio.vercel.app/',
   linkedin: 'https://www.linkedin.com/in/imesharajapaksha1998/',
   github: 'https://github.com/imesharajapaksha2020',
   googleScholar: 'https://scholar.google.com/citations?user=imesha_rajapaksha',

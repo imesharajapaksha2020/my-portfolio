@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { PERSONAL_INFO } from '@/data/portfolioData';
-import { GraduationCap, Mail, ArrowUp, Heart } from 'lucide-react';
+import { GraduationCap, Mail, ArrowUp, Heart, Globe } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from '@/components/Icons';
 
 export default function Footer() {
@@ -60,6 +60,18 @@ export default function Footer() {
             >
               <GithubIcon className="w-4 h-4" />
             </a>
+
+            {PERSONAL_INFO.website && (
+              <a
+                href={PERSONAL_INFO.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-emerald-50 dark:hover:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-300/60 dark:border-emerald-700/60 transition-colors shadow-xs"
+                title="Live Portfolio Website"
+              >
+                <Globe className="w-4 h-4" />
+              </a>
+            )}
 
             <button
               onClick={scrollToTop}
