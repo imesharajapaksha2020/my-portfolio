@@ -211,7 +211,7 @@ Generated via Imesha Rajapaksha Academic Portfolio System
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 overflow-y-auto bg-slate-950/75 dark:bg-slate-950/85 backdrop-blur-sm animate-in fade-in duration-200">
       <div className="relative w-full max-w-4xl max-h-[92vh] overflow-y-auto rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl text-slate-900 dark:text-white p-6 sm:p-10 space-y-6">
-        
+
         {/* Top Floating Control Bar */}
         <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-slate-800 no-print">
           <div className="flex items-center gap-2">
@@ -238,7 +238,7 @@ Generated via Imesha Rajapaksha Academic Portfolio System
               className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold flex items-center gap-1.5 shadow-md shadow-emerald-600/20 transition-all cursor-pointer"
             >
               <Download className="w-4 h-4" />
-              <span>{downloadSuccess ? 'Downloaded!' : 'Download CV (.txt)'}</span>
+              <span>{downloadSuccess ? 'Downloaded!' : 'Download CV (.pdf)'}</span>
             </button>
 
             <button
@@ -252,7 +252,7 @@ Generated via Imesha Rajapaksha Academic Portfolio System
 
         {/* Academic CV Printable Document Body */}
         <div className="space-y-8 bg-white dark:bg-slate-950 p-6 sm:p-8 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 text-xs sm:text-sm font-sans shadow-xs">
-          
+
           {/* Header with Academic Portrait */}
           <div className="border-b-2 border-slate-900 dark:border-slate-100 pb-4 flex flex-col sm:flex-row items-center sm:items-start justify-between gap-4">
             <div className="space-y-1.5 text-center sm:text-left flex-1">
