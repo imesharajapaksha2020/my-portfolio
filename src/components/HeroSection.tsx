@@ -63,10 +63,10 @@ export default function HeroSection() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
+
           {/* Main Hero Column (8 cols) */}
           <div className="lg:col-span-8 space-y-6">
-            
+
             {/* Academic Candidacy Callout */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 text-xs font-semibold text-slate-800 dark:text-slate-200 shadow-sm">
               <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-ping"></span>
@@ -243,7 +243,7 @@ export default function HeroSection() {
                     title="ResearchGate Profile"
                   >
                     <BookOpen className="w-4 h-4 text-teal-600 dark:text-teal-400" />
-                    <span>RG</span>
+                    <span>ResearchGate</span>
                   </a>
                 </div>
               </div>
@@ -294,7 +294,7 @@ export default function HeroSection() {
           {/* Right Column: Professor Quick Scan Card (4 cols) */}
           <div className="lg:col-span-4">
             <div className="relative rounded-2xl p-6 bg-gradient-to-b from-white via-slate-50 to-slate-100/90 dark:from-slate-900 dark:via-slate-900/95 dark:to-slate-950 border border-slate-200 dark:border-slate-800 shadow-xl dark:shadow-2xl text-slate-900 dark:text-white transition-all">
-              
+
               {/* Card Header Badge */}
               <div className="flex items-center justify-between pb-3 mb-4 border-b border-slate-200 dark:border-slate-800">
                 <span className="text-xs font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 flex items-center gap-1.5">
